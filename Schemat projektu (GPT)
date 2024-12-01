@@ -1,0 +1,38 @@
+Ramowa lista zadań do realizacji projektu w środowisku Microsoft Fabric
+1. Przygotowanie środowiska pracy
+Skonfigurowanie środowiska Microsoft Fabric (Fabric Lakehouse, Fabric Data Warehouse).
+Utworzenie repozytorium projektu na GitHub i integracja z Microsoft Fabric.
+Przygotowanie miejsca na dane (workspace w OneLake).
+2. Warstwa wczytywania danych
+Pobranie danych IMGW z dostępnych źródeł (np. FTP, API).
+Skonfigurowanie pipeline'u w Fabric Data Factory do automatycznego wczytywania danych w różnych formatach (CSV, JSON, pliki kolumnowe, PDF).
+Transformacja danych na etapie wczytywania (np. oczyszczanie, standaryzacja formatu dat, identyfikacja brakujących wartości).
+Zapis danych do jeziora danych w Fabric Lakehouse.
+3. Warstwa przekształceń danych
+Stworzenie modelu danych w jeziorze danych (Fabric Lakehouse).
+Implementacja przekształceń w Fabric Dataflows:
+Łączenie danych z różnych źródeł (np. tysiące plików).
+Normalizacja i standaryzacja danych.
+Tworzenie nowych cech (np. grupowanie wartości według kategorii).
+Migracja przetworzonych danych do Fabric Data Warehouse.
+4. Warstwa wynikowa
+Konfiguracja hurtowni danych w Fabric Data Warehouse.
+Opracowanie kwerend analitycznych dla kluczowych wymagań użytkownika końcowego.
+Eksport wyników do tabel stałych i tabel przestawnych.
+Integracja wyników z narzędziami Power BI w celu wizualizacji i raportowania.
+5. Opcjonalne rozszerzenie (uczenie maszynowe)
+Przygotowanie przetworzonych danych do analizy w Microsoft Azure ML lub Python/Notebooks w Microsoft Fabric.
+Implementacja prostych modeli (np. klasyfikacji lub regresji) na podstawie danych IMGW.
+Eksport wyników analizy do hurtowni danych lub narzędzi raportowych.
+6. Testowanie i walidacja
+Testy jakości wczytywania danych (poprawność formatów, kompletność).
+Testy kwerend analitycznych (zgodność wyników z wymaganiami).
+Walidacja działania systemu w scenariuszach końcowego użytkowania.
+7. Dokumentacja projektu
+Opis architektury systemu i użytych narzędzi.
+Szczegółowe instrukcje uruchamiania pipeline'ów i analizy danych.
+Komentarze w kodzie dla kluczowych etapów przetwarzania.
+8. Finalizacja projektu
+Przygotowanie raportu końcowego z realizacji projektu.
+Przesłanie plików projektowych (kodu, wyników, dokumentacji) na GitHub.
+Prezentacja działania systemu przed zespołem lub interesariuszami.
