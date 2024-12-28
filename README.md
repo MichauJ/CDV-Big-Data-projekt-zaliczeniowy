@@ -5,27 +5,22 @@ Wymagania projektu
 Big Data, projekt zaliczeniowy
 
 Celem projektu zaliczeniowego jest stworzenie niewielkiego systemu analitycznego. System musi się składać z:
-
+________________________________________________________________________________________________________________________________________________
 warstwy wczytującej dane początkowe, czyli na przykład:
 wczytywanie plików płaskich
-
 wczytywanie plików json
-
 wczytywanie plików kolumnowych
-
 strumienia danych
-
 parsowania danych z dokumentów pdf
-
 itp.
-
+_________________________________________________________________________________________________________
 warstwy przekształceń danych 
 baza sql bądź nosql
 
 jezioro danych
 
 lub inne rozwiązanie
-
+_____________________________________________________________________________________________________________________
 warstwy wynikowej 
 hurtownia danych z kwerendami wynikowymi, eksport danych do tabel stałych, tabel przestawnych, narzędzi BI
 Mile widziane rozszerzenie projektu w postaci zastosowania metod uczenia maszynowego. 
