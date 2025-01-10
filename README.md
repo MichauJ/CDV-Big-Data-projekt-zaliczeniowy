@@ -1,96 +1,77 @@
-# CDV-Big-Data-projekt-zaliczeniowy
+Dokumentacja projektu analizy danych meteorologicznych i opadowych (IMGW 2000-2024)
 
-Wymagania projektu
+Założenia projektu
 
-Big Data, projekt zaliczeniowy
+1. Cel:
+   Projekt ma na celu analizę danych meteorologicznych i opadowych z lat 2000-2024 w Polsce, szczególnie zaś:
+   - Zrozumienie długoterminowych trendów klimatycznych, takich jak zmiany temperatur, opadów, i innych parametrów pogodowych.
+   - Wykrywanie potencjalnych anomalii i odchyleń w danych pogodowych.
+   - Stworzenie wizualizacji umożliwiających łatwą interpretację danych przez użytkowników końcowych.
 
-Celem projektu zaliczeniowego jest stworzenie niewielkiego systemu analitycznego. System musi się składać z:
-________________________________________________________________________________________________________________________________________________
-warstwy wczytującej dane początkowe, czyli na przykład:
-wczytywanie plików płaskich
-wczytywanie plików json
-wczytywanie plików kolumnowych
-strumienia danych
-parsowania danych z dokumentów pdf
-itp.
-_________________________________________________________________________________________________________
-warstwy przekształceń danych 
-baza sql bądź nosql
+2. 	Projekt umożliwia:
+   - Agregację i łatwy dostęp do danych historycznych.
+   - Zautomatyzowaną analizę dużych zbiorów danych.
+   - Wizualizację, która wspiera podejmowanie decyzji na podstawie danych.
 
-jezioro danych
+3. Zakres danych:  
+   Dane meteorologiczne oraz opadowe zostały pozyskane z IMGW i obejmują lata 2000–2024. Dane zostały zebrane z różnych stacji pogodowych w Polsce.
 
-lub inne rozwiązanie
-_____________________________________________________________________________________________________________________
-warstwy wynikowej 
-hurtownia danych z kwerendami wynikowymi, eksport danych do tabel stałych, tabel przestawnych, narzędzi BI
-Mile widziane rozszerzenie projektu w postaci zastosowania metod uczenia maszynowego. 
-Studenci samodzielnie łączą się w zespoły trzy-cztero osobowe, wybierają lidera i proponują temat pracy. Lider zgłasza to do prowadzącego w celu akceptacji (mailowo) do 31 października. Lider jest odpowiedzialny za komunikację z prowadzącym. Termin oddania projektu 12 stycznia.
+4. Opis danych wejściowych
 
-Przykładowe pomysły:
+A. Dane meteorologiczne (2000–2024):
+Zawierają podstawowe informacje o warunkach pogodowych zebrane codziennie.  
+Pola w zestawie danych:
+- **Kod stacji** (9 znaków) – identyfikator stacji pomiarowej.  
+- **Nazwa stacji** (30 znaków) – pełna nazwa stacji pomiarowej.  
+- **Rok** (4 znaki), **Miesiąc** (2 znaki), **Dzień** (2 znaki) – data pomiaru.  
+- **Średnia dobowa temperatura [°C]** (5/1 znaków) – średnia temperatura w ciągu dnia.  
+- **Status pomiaru TEMP** (1 znak) – status pomiaru temperatury (np. brak danych oznaczony jako "8").  
+- **Średnia dobowa wilgotność względna [%]** (8/1 znaków) – średnia wartość wilgotności.  
+- **Status pomiaru WLGS** (1 znak) – status pomiaru wilgotności.  
+- **Średnia dobowa prędkość wiatru [m/s]** (6/1 znaków).  
+- **Status pomiaru FWS** (1 znak).  
+- **Średnie dobowe zachmurzenie ogólne [oktanty]** (6/1 znaków).  
+- **Status pomiaru NOS** (1 znak).  
 
-Zescrapowanie kilkuset filmów z witryny imdb, zebranie o nich kilkudziesięciu informacji (20 - 30 atrybutów) do bazy danych, zbudowanie kwerend do warstwy wynikowej dla użytkownika końcowego, ewentualnie dodanie narzędzia typu BI tool do analizy wyników końcowych
+B. Dane opadowe (2000–2024):
+Informacje dotyczące opadów deszczu oraz śniegu.  
+Pola w zestawie danych:
+- **Kod stacji** (9 znaków), **Nazwa stacji** (30 znaków), **Rok**, **Miesiąc**, **Dzień**.  
+- **Suma dobowa opadów [mm]** (8/1 znaków) – łączna ilość opadów w ciągu dnia.  
+- **Status pomiaru SMDB** (1 znak) – status pomiaru sumy dobowej opadów.  
+- **Rodzaj opadu [S/W/ ]** (1 znak) – typ opadu (śnieg, woda lub brak danych).  
+- **Wysokość pokrywy śnieżnej [cm]** (5 znaków).  
+- **Status pomiaru PKSN** (1 znak).  
+- **Wysokość świeżospałego śniegu [cm]** (5 znaków).  
+- **Status pomiaru HSS** (1 znak).  
+- **Gatunek śniegu [kod]** (1 znak).  
+- **Rodzaj pokrywy śnieżnej [kod]** (5 znaków).  
+- **Statusy**:  
+  - "8" – brak pomiaru.  
+  - "9" – brak zjawiska (również brak dnia w istniejącym miesiącu).  
 
-Napisanie api / skryptu / programu do pobrania informacji ze strony NBP (http://api.nbp.pl/api/) dotyczących kursu walut i / lub złota. Dane załadować do bazy / hurtowni (np. BigQuery) i stworzyć dla użytkownika końcowego wygodne narzędzia do analizy danych. 
+---
 
-Pobranie danych pomiarowo obserwacyjnych IMGW (jakieś tysiąc plików) i połączenie ich w jedną bazę / hurtownie danych. Stworzyć wygodne dla użytkownika końcowego rozwiązania do analizy danych. 
+5. Transformacja i przechowywanie danych
 
-Kryteria oceny projektu:
+1. Jezioro danych (Data Lake):  
+   Dane zostały zintegrowane i przechowywane w jeziorze danych utworzonym w środowisku Microsoft Fabric.  
+   - Surowe dane z IMGW zostały załadowane w ich pierwotnym formacie.  
+   - Dane zostały przekształcone do ujednoliconego formatu (ETL) i zapisane w strukturach ułatwiających dalsze analizy.
 
-terminowość tj. projekt zostaje dostarczony nie później niż w wyznaczonym czasie (12 stycznia)
+2. Magazyn Danych (Data Warehouse):  
+   Zestawy danych zostały zorganizowane w relacyjnym magazynie danych:  
+   - Tabele zostały podzielone na dane meteorologiczne i opadowe.  
+   - Umożliwiono wydajny dostęp do danych dzięki optymalizacji indeksów i struktur.
 
-przekrojowość tj.:
+---
 
-dane wynikowe są obszerne, posiadają wymiary nadające się do sensownej analizy, odpowiadają na potrzeby użytkownika, cechy zostają odpowiednio przekształcone (np. wieku w kategoriach, powierzchnia w klasach wielkości)
-
-prawidłowość tj.:
-projekt pozbawiony jest błędów technicznych (np. brak błędów we wczytywaniu danych, prawidłowe formaty, itp.), wyniki analityczne są pozbawione błędów obliczeniowych, wyników końcowe zostały sprawdzone przez uczestników
-
-niezawodność tj.: 
-kod działa zgodnie z intencją programisty bez ingerencji użytkownika
-
-czystość tj.: 
-kod nie generuje błędów
-
-kod nie generuje ostrzeżeń (jeżeli to tylko możliwe)
-
-kod nie zawiera zbędnych elementów
-
-dokumentacja tj.:
-spisane na początku istniejące założenia dot. projektu
-
-(np. jakie dane, po co, jaki problem rozwiązuje, itp.)
-
-ważniejsze części / sekcje kodu są wyodrębnione komentarzami
-
-komentarze pojawiają się w miejscach wymagających wyjaśnień
-
-poziom kodu: 
-najważniejszy jest działający kod 
-
-mile widziane jest użycie elementów jak: 
-
-własne funkcje, instrukcje warunkowe
-
-pętle
-
-wizualizacje danych 
-
-pomocnicze pliki skryptu (np. ładujące etykiety)
-
-itp.
-
-Czego oczekuję po formie projekcie:
-
-mile widziane BiGQuery, ale jestem otwarty na różne środowiska i narzędzia
-
-Projekt wszystkie niezbędne pliki, linki, itp.
-
-pliki źródłowe, 
-
-pliki skryptu, 
-
-pliki pomocnicze,
-
-pliki wynikowe
-
-Brak "śmieci" tj. zbędnych plików lub innych obiektów
+6. Analiza i wizualizacja -  Dashboard w Power BI:  
+   Stworzono interaktywny dashboard w Power BI, który umożliwia:
+   - Przegląd danych historycznych w ujęciu rocznym, miesięcznym i dziennym oraz w podziale na stacje pogodowe.
+   - Wyodrębniono dane dotyczące kwartałów tak by odseparować wpływ cykliczności pór roku
+   - Analizę trendów długoterminowych, takich jak:
+     - Średnie roczne temperatury.
+     - Średnie ilości opadów deszczu i śniegu w miesiącach i latach.
+   - Analizę innych parametrów pogodowych, takich jak wilgotność i prędkość wiatru.  
+   - Użytkownik może filtrować dane według daty, typów opadów, czy lokalizacji stacji.  
